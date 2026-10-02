@@ -1,0 +1,3 @@
+## 2025-02-20 - Keyboard Focus Rings & Dynamic Spline Rendering
+**Learning:** 3D Spline canvasses on dark backdrop pages require client-side dynamic imports (`ssr: false`) to render without SSR hydration breakage, while interactive elements (links and CTA buttons) need high-contrast `focus-visible:ring-fuchsia-500` rings with offset colors to remain visible against dark backdrop filters.
+**Action:** When adding focus states on dark glassmorphism backgrounds, use `focus-visible:ring-2 focus-visible:ring-fuchsia-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black` for seamless accessibility.
