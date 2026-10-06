@@ -1,0 +1,3 @@
+## 2026-03-30 - Spline SSR Dynamic Imports and Focus Visible Ring Indicators
+**Learning:** Next.js SSR prerendering fails on `@splinetool/react-spline` due to browser API dependencies; dynamic loading with `ssr: false` prevents build failures and improves UI rendering. Additionally, interactive buttons and navigation links require explicit `focus-visible:ring-2` styles to ensure visible feedback during keyboard navigation.
+**Action:** Dynamically import Spline with `{ ssr: false }` and add focus-visible focus ring styles (`focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500`) to all interactive elements in Next.js Tailwind applications.
