@@ -1,0 +1,3 @@
+## 2026-03-31 - Spline 3D Dynamic Import and Focus Visible Ringing
+**Learning:** Next.js 14 App Router statically prerenders client components by default unless dynamic imports with `{ ssr: false }` are explicitly configured for browser-only canvas libraries like `@splinetool/react-spline`. Additionally, dark background interactive components require distinct `focus-visible:ring-offset-black` and `focus-visible:ring-2` rules for clear accessibility.
+**Action:** Always import Spline dynamically with `ssr: false` and a loading state, and apply contrast-aware `focus-visible` ring utilities to buttons and links.
