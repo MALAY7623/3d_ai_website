@@ -1,0 +1,3 @@
+## 2025-02-18 - 3D Scene Loading States and Dark Theme Focus Visible Rings
+**Learning:** In Next.js landing pages featuring `@splinetool/react-spline`, static server prerendering fails unless `next/dynamic` (`{ ssr: false }`) is used. Adding a clean loading fallback provides essential visual feedback while heavy 3D scenes load, and custom `focus-visible:ring-fuchsia-500` outline styles provide critical keyboard navigation contrast against dark backgrounds.
+**Action:** Always dynamically import browser-only 3D canvas components with `{ ssr: false }` and explicit loading states, and ensure `focus-visible` ring indicators match theme accent colors (fuchsia).
