@@ -1,0 +1,3 @@
+## 2024-10-19 - Spline 3D Loading Fallbacks & Focus Visibility
+**Learning:** In dark-themed Next.js App Router applications featuring heavy 3D WebGL canvases (e.g. `@splinetool/react-spline`), client-side dynamic loading (`{ ssr: false }`) requires an explicit loading indicator to prevent layout shifts and SSR prerender errors. Additionally, standard button focus rings on dark backdrops need explicit `focus-visible:ring-2 focus-visible:ring-fuchsia-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black` for high contrast keyboard navigation.
+**Action:** Always dynamically import 3D Canvas components with an `animate-pulse` visual fallback and specify `ring-offset` matching background dark colors for focus visibility.
