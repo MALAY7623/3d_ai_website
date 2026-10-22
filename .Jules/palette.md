@@ -1,0 +1,3 @@
+## 2025-02-17 - Dynamic 3D Spline Prerendering & Focus Accessibility
+**Learning:** `@splinetool/react-spline` relies on browser APIs and breaks Next.js static prerendering if rendered on the server during `next build`. Dynamic import with `{ ssr: false }` is required. Additionally, interactive buttons and navigation links require explicit `focus-visible` ring utility classes to ensure full keyboard navigation support and accessible landmarks.
+**Action:** Always dynamically import `@splinetool/react-spline` with `{ ssr: false }` and add `focus-visible:ring-2 focus-visible:ring-fuchsia-500` to interactive landing page elements.
