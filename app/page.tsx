@@ -1,12 +1,25 @@
 "use client"
 
-import Spline from '@splinetool/react-spline'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
 import infoCards from './libs/InfoCards'
-import { CheckCheck, LucideIcon } from 'lucide-react'
+import { CheckCheck, LucideIcon, Loader2 } from 'lucide-react'
 import { ReactElement } from 'react'
 import pricingCards from './libs/PricingCards'
+
+const Spline = dynamic(() => import('@splinetool/react-spline'), {
+  ssr: false,
+  loading: () => (
+    <div
+      aria-label="Loading interactive 3D model"
+      className="flex flex-col items-center justify-center gap-2 text-zinc-400"
+    >
+      <Loader2 className="w-8 h-8 animate-spin text-fuchsia-500" aria-hidden="true" />
+      <span className="text-xs font-medium">Loading 3D Experience...</span>
+    </div>
+  ),
+})
 
 export default function Home() {
   return (
@@ -16,12 +29,12 @@ export default function Home() {
         <div className='w-full h-2/4 md:h-full md:w-2/5 flex flex-col justify-center items-center md:items-start gap-8'>
           <div className='flex flex-col gap-2'>
             <h1 className='text-4xl font-black md:text-8xl'>Insightful</h1>
-            <h2 className='text-md md:text-2xl'>Start growing today!</h2>
+            <p className='text-md md:text-2xl font-semibold'>Start growing today!</p>
           </div>
           <p className='max-w-md text-sm md:text-base text-zinc-500'>Insightful is an AI-powered sales optimization tool that provides data-driven insights to boost sales performance.</p>
           <div className='w-full flex items-center justify-center md:justify-start gap-4'>
-            <button className='w-48 h-12 text-sm sm:text-base rounded bg-white text-black hover:bg-fuchsia-700 hover:text-white transition-colors'>Try 7 days free!</button>
-            <button className='w-48 h-12 text-sm sm:text-base rounded hover:bg-white hover:text-white hover:bg-opacity-5 transition-colors'>Contact</button>
+            <button className='w-48 h-12 text-sm sm:text-base rounded bg-white text-black hover:bg-fuchsia-700 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black'>Try 7 days free!</button>
+            <button className='w-48 h-12 text-sm sm:text-base rounded hover:bg-white hover:text-white hover:bg-opacity-5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black'>Contact</button>
           </div>
         </div>
 
@@ -33,10 +46,10 @@ export default function Home() {
 
       <section id="about" className="h-fit min-h-screen w-full flex relative items-center justify-center p-8">
         <div className='absolute -z-10 h-full w-full overflow-hidden'>
-          <Image src="/whirl.svg" fill className="absolute object-cover w-full overflow-visible sm:rotate-90" alt="Background Whirl"/>
+          <Image src="/whirl.svg" fill className="absolute object-cover w-full overflow-visible sm:rotate-90" alt="" aria-hidden="true"/>
         </div>
         <div className="w-full h-full flex items-center justify-center flex-col gap-8 max-w-7xl">
-          <h3 className='text-4xl md:text-5xl font-bold'>No More Time Wasted!</h3>
+          <h2 className='text-4xl md:text-5xl font-bold'>No More Time Wasted!</h2>
           <div className="w-full grid grid-cols-1 grid-rows-3 md:grid-cols-2 md:grid-rows-2 lg:grid-cols-3 lg:grid-rows-1 gap-4 justify-between relative">
             {infoCards.map((infoCard) => {
               return (
@@ -50,7 +63,7 @@ export default function Home() {
       </section>
 
       <section id="pricing" className="h-fit min-h-screen w-full flex flex-col items-center justify-center gap-8 p-8">
-        <h4 className="text-4xl md:text-5xl font-bold">Pricing</h4>
+        <h2 className="text-4xl md:text-5xl font-bold">Pricing</h2>
         <div className='grid grid-cols-1 grid-rows-2 sm:grid-rows-1 sm:grid-cols-2 items-center h-fit w-full max-w-3xl gap-8'>
             {pricingCards.map((pricingCard) => {
               return (
@@ -74,7 +87,7 @@ function InfoCard({title,Icon,children}:IInfoCardProps) {
   return (
     <div className='w-full h-80 rounded flex flex-col justify-around items-center p-8 bg-gray-900 rounded bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-20'>
       <div className="p-4 bg-fuchsia-700 rounded-full">
-        <Icon />
+        <Icon aria-hidden="true" />
       </div>
       <div>
         <h3 className='text-lg font-bold sm:text-xl'>{title}</h3>
@@ -95,20 +108,20 @@ function PricingCard({title,price,benefits,oneliner}:IPricingCardProps) {
     <div className='h-fit w-full rounded flex flex-col p-8 gap-8 bg-gray-900 rounded bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-20'>
       <div className='flex flex-col gap-2'>
         <div>
-          <h6 className='text-2xl'>{title}</h6>
+          <h3 className='text-2xl font-bold'>{title}</h3>
           <p className='text-sm text-zinc-500'>{oneliner}</p>
         </div>
         <p className='text-4xl font-bold'>
           ${price} <span className='text-sm font-normal text-zinc-500'>/ Month</span>
         </p>
       </div>
-      <button className='bg-fuchsia-700 rounded p-2 text-sm transition-colors hover:bg-fuchsia-800'>Try 7 days free!</button>
+      <button className='bg-fuchsia-700 rounded p-2 text-sm transition-colors hover:bg-fuchsia-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black'>Try 7 days free!</button>
       <div className='flex flex-col w-full gap-4'>
         {benefits.map((benefit, i) => {
           return(
             <p key={i} className='text-sm text-zinc-500 flex items-center gap-2'>
               <span>
-                <CheckCheck />
+                <CheckCheck aria-hidden="true" />
               </span>
               {benefit}
             </p>
@@ -121,16 +134,15 @@ function PricingCard({title,price,benefits,oneliner}:IPricingCardProps) {
 
 function Navbar() {
   return (
-    <div className='w-full h-16 backdrop-filter backdrop-blur-xl bg-opacity-20 border-b flex items-center justify-center'>
-      <div className='max-w-7xl w-full flex items-center justify-between p-4'>
-        <h6 className='font-bold'>Insightful</h6>
+    <header className='w-full h-16 backdrop-filter backdrop-blur-xl bg-opacity-20 border-b flex items-center justify-center sticky top-0 z-50 bg-black/50'>
+      <nav aria-label="Main navigation" className='max-w-7xl w-full flex items-center justify-between p-4'>
+        <span className='font-bold text-lg'>Insightful</span>
         <ul className='flex gap-8'>
-          <li><Link className='hover:text-fuchsia-500 transition-colors text-xs sm:text-base' href="#home">Home</Link></li>
-          <li><Link className='hover:text-fuchsia-500 transition-colors text-xs sm:text-base' href="#about">About</Link></li>
-          <li><Link className='hover:text-fuchsia-500 transition-colors text-xs sm:text-base' href="#pricing">Pricing</Link></li>
+          <li><Link className='hover:text-fuchsia-500 transition-colors text-xs sm:text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 rounded px-1' href="#home">Home</Link></li>
+          <li><Link className='hover:text-fuchsia-500 transition-colors text-xs sm:text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 rounded px-1' href="#about">About</Link></li>
+          <li><Link className='hover:text-fuchsia-500 transition-colors text-xs sm:text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 rounded px-1' href="#pricing">Pricing</Link></li>
         </ul>
-      </div>
-
-    </div>
+      </nav>
+    </header>
   )
 }
