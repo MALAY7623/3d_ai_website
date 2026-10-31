@@ -1,6 +1,6 @@
 "use client"
 
-import Spline from '@splinetool/react-spline'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
 import infoCards from './libs/InfoCards'
@@ -8,28 +8,41 @@ import { CheckCheck, LucideIcon } from 'lucide-react'
 import { ReactElement } from 'react'
 import pricingCards from './libs/PricingCards'
 
+const Spline = dynamic(() => import('@splinetool/react-spline'), { ssr: false })
+
 export default function Home() {
   return (
-    <main className='flex min-h-screen h-fit flex-col items-center justify-center relative'>
-      <Navbar />
-      <header id="home" className="flex flex-col-reverse md:flex-row w-full h-screen max-w-7xl items-center justify-center p-8 relative overflow-x-hidden">
-        <div className='w-full h-2/4 md:h-full md:w-2/5 flex flex-col justify-center items-center md:items-start gap-8'>
-          <div className='flex flex-col gap-2'>
-            <h1 className='text-4xl font-black md:text-8xl'>Insightful</h1>
-            <h2 className='text-md md:text-2xl'>Start growing today!</h2>
+    <>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-fuchsia-700 focus:text-white focus:rounded focus:outline-none focus:ring-2 focus:ring-white shadow-lg"
+      >
+        Skip to main content
+      </a>
+      <main id="main-content" tabIndex={-1} className='flex min-h-screen h-fit flex-col items-center justify-center relative outline-none'>
+        <Navbar />
+        <header id="home" className="flex flex-col-reverse md:flex-row w-full h-screen max-w-7xl items-center justify-center p-8 relative overflow-x-hidden">
+          <div className='w-full h-2/4 md:h-full md:w-2/5 flex flex-col justify-center items-center md:items-start gap-8'>
+            <div className='flex flex-col gap-2'>
+              <h1 className='text-4xl font-black md:text-8xl'>Insightful</h1>
+              <h2 className='text-md md:text-2xl'>Start growing today!</h2>
+            </div>
+            <p className='max-w-md text-sm md:text-base text-zinc-500'>Insightful is an AI-powered sales optimization tool that provides data-driven insights to boost sales performance.</p>
+            <div className='w-full flex items-center justify-center md:justify-start gap-4'>
+              <button className='w-48 h-12 text-sm sm:text-base rounded bg-white text-black hover:bg-fuchsia-700 hover:text-white transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black'>
+                Try 7 days free!
+              </button>
+              <button className='w-48 h-12 text-sm sm:text-base rounded border border-white/20 hover:bg-white/10 hover:text-white transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black'>
+                Contact
+              </button>
+            </div>
           </div>
-          <p className='max-w-md text-sm md:text-base text-zinc-500'>Insightful is an AI-powered sales optimization tool that provides data-driven insights to boost sales performance.</p>
-          <div className='w-full flex items-center justify-center md:justify-start gap-4'>
-            <button className='w-48 h-12 text-sm sm:text-base rounded bg-white text-black hover:bg-fuchsia-700 hover:text-white transition-colors'>Try 7 days free!</button>
-            <button className='w-48 h-12 text-sm sm:text-base rounded hover:bg-white hover:text-white hover:bg-opacity-5 transition-colors'>Contact</button>
+
+          <div className='w-full h-2/4 md:h-full md:w-3/5 flex items-center justify-center relative -z-10' aria-hidden="true">
+            <Spline className="w-full flex scale-[.25] sm:scale-[.35] lg:scale-[.5] items-center justify-center md:justify-start" scene='https://prod.spline.design/pvM5sSiYV2ivWraz/scene.splinecode'/>
           </div>
-        </div>
 
-        <div className='w-full h-2/4 md:h-full md:w-3/5 flex items-center justify-center relative -z-10'>
-          <Spline className="w-full flex scale-[.25] sm:scale-[.35] lg:scale-[.5] items-center justify-center md:justify-start" scene='https://prod.spline.design/pvM5sSiYV2ivWraz/scene.splinecode'/>
-        </div>
-
-      </header>
+        </header>
 
       <section id="about" className="h-fit min-h-screen w-full flex relative items-center justify-center p-8">
         <div className='absolute -z-10 h-full w-full overflow-hidden'>
@@ -60,7 +73,8 @@ export default function Home() {
         </div>
       </section>
 
-    </main>
+      </main>
+    </>
   )
 }
 
@@ -102,7 +116,9 @@ function PricingCard({title,price,benefits,oneliner}:IPricingCardProps) {
           ${price} <span className='text-sm font-normal text-zinc-500'>/ Month</span>
         </p>
       </div>
-      <button className='bg-fuchsia-700 rounded p-2 text-sm transition-colors hover:bg-fuchsia-800'>Try 7 days free!</button>
+      <button className='bg-fuchsia-700 rounded p-2 text-sm transition-all hover:bg-fuchsia-800 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black'>
+        Try 7 days free!
+      </button>
       <div className='flex flex-col w-full gap-4'>
         {benefits.map((benefit, i) => {
           return(
@@ -121,16 +137,29 @@ function PricingCard({title,price,benefits,oneliner}:IPricingCardProps) {
 
 function Navbar() {
   return (
-    <div className='w-full h-16 backdrop-filter backdrop-blur-xl bg-opacity-20 border-b flex items-center justify-center'>
-      <div className='max-w-7xl w-full flex items-center justify-between p-4'>
-        <h6 className='font-bold'>Insightful</h6>
+    <header className='w-full h-16 backdrop-filter backdrop-blur-xl bg-opacity-20 border-b flex items-center justify-center sticky top-0 z-40 bg-black/40'>
+      <nav aria-label="Main Navigation" className='max-w-7xl w-full flex items-center justify-between p-4'>
+        <a href="#home" className='font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 rounded px-1'>
+          Insightful
+        </a>
         <ul className='flex gap-8'>
-          <li><Link className='hover:text-fuchsia-500 transition-colors text-xs sm:text-base' href="#home">Home</Link></li>
-          <li><Link className='hover:text-fuchsia-500 transition-colors text-xs sm:text-base' href="#about">About</Link></li>
-          <li><Link className='hover:text-fuchsia-500 transition-colors text-xs sm:text-base' href="#pricing">Pricing</Link></li>
+          <li>
+            <Link className='hover:text-fuchsia-500 transition-colors text-xs sm:text-base rounded px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500' href="#home">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link className='hover:text-fuchsia-500 transition-colors text-xs sm:text-base rounded px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500' href="#about">
+              About
+            </Link>
+          </li>
+          <li>
+            <Link className='hover:text-fuchsia-500 transition-colors text-xs sm:text-base rounded px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500' href="#pricing">
+              Pricing
+            </Link>
+          </li>
         </ul>
-      </div>
-
-    </div>
+      </nav>
+    </header>
   )
 }
