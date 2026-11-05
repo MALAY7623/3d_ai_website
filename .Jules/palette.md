@@ -1,0 +1,5 @@
+# Palette's UX & Accessibility Journal
+
+## 2026-11-05 - 3D Landing Page Accessibility & Dynamic Spline Imports
+**Learning:** Next.js App Router static prerendering breaks when `@splinetool/react-spline` is statically imported due to runtime browser dependencies. Dynamically importing via `next/dynamic` with `{ ssr: false }` resolves static rendering. Furthermore, 3D Spline canvases are primarily decorative or interactive backgrounds; marking their outer container with `aria-hidden="true"` prevents assistive technologies from getting trapped or confused in canvas elements, while adding a "Skip to main content" link and explicit `focus-visible` offset rings (`focus-visible:ring-fuchsia-500 focus-visible:ring-offset-black`) ensures keyboard users can easily bypass navigation and maintain clear visual indicators across dark theme surfaces.
+**Action:** Always import Spline dynamically with `ssr: false`, wrap decorative 3D scenes in `aria-hidden="true"`, and provide skip links and high-contrast `focus-visible` rings with appropriate theme offset for all dark interactive controls.
