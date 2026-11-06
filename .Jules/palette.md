@@ -1,0 +1,5 @@
+# Palette's Journal
+
+## 2025-02-17 - Accessible Focus States & Navigation on Dark 3D Landing Pages
+**Learning:** Dark themed landing pages featuring WebGL / 3D canvases (like Spline) often omit native focus outlines or lose contrast against saturated or dark backgrounds. Combining `focus-visible:ring-2 focus-visible:ring-fuchsia-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black` ensures visible contrast when navigating with keyboard without creating visual noise for mouse clicks. Additionally, single-page landing sites with header navbars benefit significantly from an accessible "Skip to main content" link and CSS smooth scrolling (`scroll-smooth`), allowing screen reader and keyboard users to bypass sticky navbars directly to the content.
+**Action:** When working on dark 3D landing experiences, always pair interactive buttons and links with high-contrast `focus-visible:ring-offset-black` focus rings, ensure client-only rendering for WebGL canvases via Next.js dynamic import (`ssr: false`), and provide a skip-to-content anchor.
