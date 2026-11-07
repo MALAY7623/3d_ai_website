@@ -1,12 +1,14 @@
 "use client"
 
-import Spline from '@splinetool/react-spline'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
 import infoCards from './libs/InfoCards'
 import { CheckCheck, LucideIcon } from 'lucide-react'
 import { ReactElement } from 'react'
 import pricingCards from './libs/PricingCards'
+
+const Spline = dynamic(() => import('@splinetool/react-spline'), { ssr: false })
 
 export default function Home() {
   return (
@@ -20,8 +22,8 @@ export default function Home() {
           </div>
           <p className='max-w-md text-sm md:text-base text-zinc-500'>Insightful is an AI-powered sales optimization tool that provides data-driven insights to boost sales performance.</p>
           <div className='w-full flex items-center justify-center md:justify-start gap-4'>
-            <button className='w-48 h-12 text-sm sm:text-base rounded bg-white text-black hover:bg-fuchsia-700 hover:text-white transition-colors'>Try 7 days free!</button>
-            <button className='w-48 h-12 text-sm sm:text-base rounded hover:bg-white hover:text-white hover:bg-opacity-5 transition-colors'>Contact</button>
+            <button className='w-48 h-12 text-sm sm:text-base rounded bg-white text-black hover:bg-fuchsia-700 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950'>Try 7 days free!</button>
+            <button className='w-48 h-12 text-sm sm:text-base rounded hover:bg-white hover:text-white hover:bg-opacity-5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950'>Contact</button>
           </div>
         </div>
 
@@ -102,7 +104,7 @@ function PricingCard({title,price,benefits,oneliner}:IPricingCardProps) {
           ${price} <span className='text-sm font-normal text-zinc-500'>/ Month</span>
         </p>
       </div>
-      <button className='bg-fuchsia-700 rounded p-2 text-sm transition-colors hover:bg-fuchsia-800'>Try 7 days free!</button>
+      <button className='bg-fuchsia-700 rounded p-2 text-sm transition-colors hover:bg-fuchsia-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950'>Try 7 days free!</button>
       <div className='flex flex-col w-full gap-4'>
         {benefits.map((benefit, i) => {
           return(
@@ -121,16 +123,15 @@ function PricingCard({title,price,benefits,oneliner}:IPricingCardProps) {
 
 function Navbar() {
   return (
-    <div className='w-full h-16 backdrop-filter backdrop-blur-xl bg-opacity-20 border-b flex items-center justify-center'>
+    <nav aria-label="Main Navigation" className='w-full h-16 backdrop-filter backdrop-blur-xl bg-opacity-20 border-b flex items-center justify-center'>
       <div className='max-w-7xl w-full flex items-center justify-between p-4'>
-        <h6 className='font-bold'>Insightful</h6>
+        <span className='font-bold text-lg'>Insightful</span>
         <ul className='flex gap-8'>
-          <li><Link className='hover:text-fuchsia-500 transition-colors text-xs sm:text-base' href="#home">Home</Link></li>
-          <li><Link className='hover:text-fuchsia-500 transition-colors text-xs sm:text-base' href="#about">About</Link></li>
-          <li><Link className='hover:text-fuchsia-500 transition-colors text-xs sm:text-base' href="#pricing">Pricing</Link></li>
+          <li><Link className='hover:text-fuchsia-500 transition-colors text-xs sm:text-base rounded px-1 py-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500' href="#home">Home</Link></li>
+          <li><Link className='hover:text-fuchsia-500 transition-colors text-xs sm:text-base rounded px-1 py-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500' href="#about">About</Link></li>
+          <li><Link className='hover:text-fuchsia-500 transition-colors text-xs sm:text-base rounded px-1 py-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500' href="#pricing">Pricing</Link></li>
         </ul>
       </div>
-
-    </div>
+    </nav>
   )
 }
