@@ -1,6 +1,6 @@
 "use client"
 
-import Spline from '@splinetool/react-spline'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
 import infoCards from './libs/InfoCards'
@@ -8,11 +8,19 @@ import { CheckCheck, LucideIcon } from 'lucide-react'
 import { ReactElement } from 'react'
 import pricingCards from './libs/PricingCards'
 
+const Spline = dynamic(() => import('@splinetool/react-spline'), { ssr: false })
+
 export default function Home() {
   return (
     <main className='flex min-h-screen h-fit flex-col items-center justify-center relative'>
+      <a
+        href="#home"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-fuchsia-700 focus:text-white focus:rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-fuchsia-500 shadow-md"
+      >
+        Skip to main content
+      </a>
       <Navbar />
-      <header id="home" className="flex flex-col-reverse md:flex-row w-full h-screen max-w-7xl items-center justify-center p-8 relative overflow-x-hidden">
+      <header id="home" tabIndex={-1} className="flex flex-col-reverse md:flex-row w-full h-screen max-w-7xl items-center justify-center p-8 relative overflow-x-hidden outline-none">
         <div className='w-full h-2/4 md:h-full md:w-2/5 flex flex-col justify-center items-center md:items-start gap-8'>
           <div className='flex flex-col gap-2'>
             <h1 className='text-4xl font-black md:text-8xl'>Insightful</h1>
@@ -20,8 +28,8 @@ export default function Home() {
           </div>
           <p className='max-w-md text-sm md:text-base text-zinc-500'>Insightful is an AI-powered sales optimization tool that provides data-driven insights to boost sales performance.</p>
           <div className='w-full flex items-center justify-center md:justify-start gap-4'>
-            <button className='w-48 h-12 text-sm sm:text-base rounded bg-white text-black hover:bg-fuchsia-700 hover:text-white transition-colors'>Try 7 days free!</button>
-            <button className='w-48 h-12 text-sm sm:text-base rounded hover:bg-white hover:text-white hover:bg-opacity-5 transition-colors'>Contact</button>
+            <button className='w-48 h-12 text-sm sm:text-base rounded bg-white text-black hover:bg-fuchsia-700 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 focus-visible:ring-offset-2 transition-colors'>Try 7 days free!</button>
+            <button className='w-48 h-12 text-sm sm:text-base rounded hover:bg-white hover:text-white hover:bg-opacity-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 focus-visible:ring-offset-2 transition-colors'>Contact</button>
           </div>
         </div>
 
@@ -102,7 +110,7 @@ function PricingCard({title,price,benefits,oneliner}:IPricingCardProps) {
           ${price} <span className='text-sm font-normal text-zinc-500'>/ Month</span>
         </p>
       </div>
-      <button className='bg-fuchsia-700 rounded p-2 text-sm transition-colors hover:bg-fuchsia-800'>Try 7 days free!</button>
+      <button className='bg-fuchsia-700 rounded p-2 text-sm transition-colors hover:bg-fuchsia-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 focus-visible:ring-offset-2'>Try 7 days free!</button>
       <div className='flex flex-col w-full gap-4'>
         {benefits.map((benefit, i) => {
           return(
@@ -125,9 +133,9 @@ function Navbar() {
       <div className='max-w-7xl w-full flex items-center justify-between p-4'>
         <h6 className='font-bold'>Insightful</h6>
         <ul className='flex gap-8'>
-          <li><Link className='hover:text-fuchsia-500 transition-colors text-xs sm:text-base' href="#home">Home</Link></li>
-          <li><Link className='hover:text-fuchsia-500 transition-colors text-xs sm:text-base' href="#about">About</Link></li>
-          <li><Link className='hover:text-fuchsia-500 transition-colors text-xs sm:text-base' href="#pricing">Pricing</Link></li>
+          <li><Link className='hover:text-fuchsia-500 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 focus-visible:ring-offset-2 transition-colors text-xs sm:text-base' href="#home">Home</Link></li>
+          <li><Link className='hover:text-fuchsia-500 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 focus-visible:ring-offset-2 transition-colors text-xs sm:text-base' href="#about">About</Link></li>
+          <li><Link className='hover:text-fuchsia-500 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 focus-visible:ring-offset-2 transition-colors text-xs sm:text-base' href="#pricing">Pricing</Link></li>
         </ul>
       </div>
 
