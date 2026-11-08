@@ -1,0 +1,3 @@
+## 2026-11-08 - Keyboard Navigation and Next.js 3D Prerendering
+**Learning:** Next.js static prerendering crashes when 3D Spline runtimes access client-only browser globals, preventing keyboard accessibility and build verifications; combining `next/dynamic` client hydration with a dedicated "Skip to content" link and distinct `focus-visible` ring outlines ensures full WCAG keyboard navigation support without breaking static optimization.
+**Action:** Always load browser-dependent 3D canvas libraries via `next/dynamic` with `ssr: false` and verify that keyboard focus states and skip navigation targets are available on all marketing landing pages.
