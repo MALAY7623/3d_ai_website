@@ -1,0 +1,3 @@
+## 2024-03-30 - Client-Side 3D Canvas SSR and Focus Ring Contrast on Dark Themes
+**Learning:** When using `@splinetool/react-spline` in Next.js App Router, direct imports fail during static page prerendering (`pnpm build`) with runtime reference errors due to missing browser APIs. In dark mode or glassmorphic designs (`backdrop-blur bg-opacity-20`), default browser focus outlines are nearly invisible against dark and transparent backgrounds.
+**Action:** Always import client-only 3D canvas libraries like `@splinetool/react-spline` with `dynamic(() => import(...), { ssr: false })`, provide accessible skip links (`sr-only focus:not-sr-only`), and add explicit high-contrast focus rings (`focus-visible:ring-2 focus-visible:ring-fuchsia-500`) to all interactive elements.
